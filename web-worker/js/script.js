@@ -1,11 +1,10 @@
 const workBtn = document.querySelector('#work-btn');
 workBtn.addEventListener('click', () => {
-    let final = 0;
-    for(let i = 0; i < 1000000; i++) {
-        final += i;
-        console.log(final);
+    const myWorker = new Worker("js/worker.js");
+    myWorker.postMessage("do work");
+    myWorker.onmessage = function(e) {
+        document.querySelector("#output").innerHTML = e.data;
     }
-    document.querySelector("#output").innerHTML = final;
 })
 
 const hahaBtn = document.querySelector("#btn");
